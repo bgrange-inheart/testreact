@@ -1,12 +1,13 @@
-import React from 'react';
+import * as React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Nav, Form} from 'react-bootstrap';
 import * as THREE from "three";
 import {Hello} from './Hello';
 
+export interface SettingsPanelProps { cubeColor: THREE.Color, onColorChange(col:THREE.Color): any }
 
-  class SettingsPanel extends React.Component {
-    constructor(props)
+export class SettingsPanel extends React.Component<SettingsPanelProps, {}> {
+    constructor(props: SettingsPanelProps)
     {
         super(props);
     }
@@ -21,6 +22,7 @@ import {Hello} from './Hello';
         let colStr = '#'+this.props.cubeColor.getHexString();
         return (
             <Nav defaultActiveKey="/home" className="flex-column" >
+                <Hello title="Menu"/>
                 <Button style={{'backgroundColor': colStr, 'color': '#000000'}}  onClick={() => this.handleColor()}>
                     Color
                 </Button>
@@ -36,7 +38,6 @@ import {Hello} from './Hello';
                     id="disabled-custom-switch"
                     />
                 </Form>
-                <Hello/>
             </Nav>
         );
     }

@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   module.exports = {
     mode: 'development',
     entry: {
-      app: './src/App.js'
+      app: './src/App.tsx'
     },
     
     module: {
@@ -28,10 +28,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
     devServer: {
         contentBase: './dist',
     },
-   /* externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },*/
+
     plugins: [
      new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({

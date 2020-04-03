@@ -2,13 +2,18 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Viewer3d from './components/Viewer3d';
-import SettingsPanel2 from './components/SettingsPanel2';
+import { Viewer3d } from './components/Viewer3d';
+import { SettingsPanel } from './components/SettingsPanel';
 import {Container} from 'react-bootstrap';
 import * as THREE from "three";
 
-  class App extends React.Component {
-    constructor(props) {
+interface AppProps {}
+interface AppState { cubeColor: THREE.Color, scene: THREE.Scene }
+
+  class App extends React.Component<{}, AppState> {
+      material: THREE.MeshPhongMaterial;
+
+    constructor(props: AppProps) {
       super(props);
       this.state = {
         cubeColor: new THREE.Color(1, 1, 1),
@@ -25,8 +30,8 @@ import * as THREE from "three";
             side: THREE.DoubleSide,
             flatShading: true
         } );
-        this.cube = new THREE.Mesh( geometry, this.material );
-        scene.add( this.cube );
+        let cube = new THREE.Mesh( geometry, this.material );
+        scene.add(cube);
             let light = new THREE.PointLight( 0xffffff, 1, 0 );
         light.position.set( 20, 0, 200 );
         scene.add(light);
@@ -34,7 +39,7 @@ import * as THREE from "three";
         return scene;
     }
 
-    handleColorChange(color)
+    handleColorChange(color: THREE.Color)
     {
         this.setState({cubeColor:color});
         this.material.color = color;
@@ -44,9 +49,9 @@ import * as THREE from "three";
     render() {
       return (
         <div className="app">
-            <SettingsPanel2 cubeColor={this.state.cubeColor} onColorChange={col=>this.handleColorChange(col)} />
+            <SettingsPanel cubeColor={this.state.cubeColor} onColorChange={col=>this.handleColorChange(col)} />
             <Container fluid>
-                <Viewer3d cubeColor={this.state.cubeColor} scene={this.state.scene}/>
+                <Viewer3d scene={this.state.scene}/>
             </Container>        
         </div>
       );

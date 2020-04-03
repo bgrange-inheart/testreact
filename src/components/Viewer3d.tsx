@@ -1,8 +1,16 @@
-import React, { Component } from "react";
+import * as React from "react";
 import * as THREE from "three";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
-class Viewer3d extends Component {
+
+export interface Viewer3dProps { scene: THREE.Scene; }
+
+export class Viewer3d extends React.Component<Viewer3dProps, {}> {
+    camera: THREE.PerspectiveCamera;
+    controls: OrbitControls;
+    renderer: THREE.Renderer;
+    el: HTMLDivElement;
+
     sceneSetup() {
         // get container dimensions and use them for scene sizing
         const width = this.el.clientWidth;
@@ -32,7 +40,7 @@ class Viewer3d extends Component {
 
     handleWindowResize() {
         const width = this.el.clientWidth;
-        const height = window.innerHeight;//this.el.clientHeight;
+        const height = window.innerHeight;
         console.log(this.el.clientWidth, this.el.clientHeight);
     
         this.renderer.setSize( width, height );
@@ -42,7 +50,7 @@ class Viewer3d extends Component {
 
     startAnimationLoop() {
         this.renderer.render( this.props.scene, this.camera );
-        this.requestID = window.requestAnimationFrame(this.startAnimationLoop.bind(this));
+        window.requestAnimationFrame(this.startAnimationLoop.bind(this));
     }
 
   render() {
@@ -52,5 +60,3 @@ class Viewer3d extends Component {
   }
 
 }
-
-export default Viewer3d;
