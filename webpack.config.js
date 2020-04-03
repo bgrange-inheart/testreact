@@ -5,18 +5,22 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   module.exports = {
     mode: 'development',
     entry: {
-      app: './src/app.js'
+      app: './src/App.js'
     },
     
     module: {
         rules: [
-          { test: /\.(js|jsx)$/, 
-            exclude: /node_modules/,
-            use: 'babel-loader' 
-          },
+            { test: /\.(js|jsx)$/, 
+                            exclude: /node_modules/,
+                            use: 'babel-loader' 
+                          },
           { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-          { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] }
+          { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
+          { test: /\.tsx?$/, exclude: /node_modules/, use: 'ts-loader' },
         ]
+    },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ],
     },
 
     devtool: 'inline-source-map',
@@ -24,7 +28,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
     devServer: {
         contentBase: './dist',
     },
-
+   /* externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    },*/
     plugins: [
      new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({

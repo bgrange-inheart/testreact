@@ -2,6 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Nav, Form} from 'react-bootstrap';
 import * as THREE from "three";
+import {Hello} from './Hello';
+
 
   class SettingsPanel extends React.Component {
     constructor(props)
@@ -34,6 +36,7 @@ import * as THREE from "three";
                     id="disabled-custom-switch"
                     />
                 </Form>
+                <Hello/>
             </Nav>
         );
     }

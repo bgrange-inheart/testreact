@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Viewer3d from './Viewer3d';
-import SettingsPanel from './SettingsPanel.js';
+import Viewer3d from './components/Viewer3d';
+import SettingsPanel2 from './components/SettingsPanel2';
 import {Container} from 'react-bootstrap';
 import * as THREE from "three";
 
@@ -44,7 +44,7 @@ import * as THREE from "three";
     render() {
       return (
         <div className="app">
-            <SettingsPanel cubeColor={this.state.cubeColor} onColorChange={col=>this.handleColorChange(col)} />
+            <SettingsPanel2 cubeColor={this.state.cubeColor} onColorChange={col=>this.handleColorChange(col)} />
             <Container fluid>
                 <Viewer3d cubeColor={this.state.cubeColor} scene={this.state.scene}/>
             </Container>        
